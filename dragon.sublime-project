@@ -1,0 +1,12 @@
+{
+    "folders" : [
+        {
+            "path" : "ch03",
+            "name" : "Chapter 03: Lexical Analysis"
+        }
+    ],
+    "settings" : {
+      "tab_size" : 2,
+      "rulers" : [80]
+    }
+}
