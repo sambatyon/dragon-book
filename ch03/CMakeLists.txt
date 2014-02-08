@@ -22,10 +22,12 @@ ADD_EXECUTABLE(finiteautomata
                non-deterministic-finite-automata.hh
                regex-lexer.hh
                regex-parser.hh
+               regex-parser-ast.hh
                finite-automata.cc
                deterministic-finite-automata.cc
                non-deterministic-finite-automata.cc
                regex-lexer.cc
                regex-parser.cc
+               regex-parser-ast.cc
                automata-main.cc)
 ADD_EXECUTABLE(knuth-morris-pratt knuth-morris-pratt.cc)
