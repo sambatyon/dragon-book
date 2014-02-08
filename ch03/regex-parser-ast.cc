@@ -26,9 +26,8 @@ AstNodePtr RegexParserAst::Regex() {
       break;
     case RegexLexer::kSymbol: {
 
-      auto res = std::make_shared<AstNodeSymbol>();
-      res->symbol = lookahead_.value;
-      res->position = position_id_gen_++;
+      auto res = std::make_shared<AstNodeSymbol>(lookahead_.value,
+                                                 position_id_gen_++);
 
       Move();
       return CheckModifiers(res);
@@ -82,26 +81,15 @@ AstNodePtr RegexParserAst::ParenRegex() {
 }
 
 AstNodePtr RegexParserAst::ApplyKleene(AstNodePtr ast) {
-  auto res = std::make_shared<AstNodeStar>();
-  res->ast = ast;
-
-  return res;
+  return std::make_shared<AstNodeStar>(ast);
 }
 
 AstNodePtr RegexParserAst::ApplyOr(AstNodePtr left, AstNodePtr right) {
-  auto res = std::make_shared<AstNodeEither>();
-  res->left = left;
-  res->right = right;
-
-  return res;
+  return std::make_shared<AstNodeEither>(left, right);
 }
 
 AstNodePtr RegexParserAst::ApplyConcat(AstNodePtr left, AstNodePtr right) {
-  auto res = std::make_shared<AstNodeCat>();
-  res->left = left;
-  res->right = right;
-
-  return res;
+  return std::make_shared<AstNodeCat>(left, right);
 }
 
 void RegexParserAst::Match(const RegexLexer::token_tag_t tag) {
