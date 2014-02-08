@@ -25,8 +25,12 @@ AstNodeSymbol::AstNodeSymbol(char symbol, std::uint32_t pos)
 
 void AstNodeSymbol::DoUpdate() {
   nullable_ = symbol_ == '\x19' ? true : false;
-  first_positions_.insert(position_);
-  last_positions_.insert(position_);
+  first_positions_.clear();
+  last_positions_.clear();
+  if (!nullable_) {
+    first_positions_.insert(position_);
+    last_positions_.insert(position_);
+  }
   if (parent_)
     parent_->Update();
 }
